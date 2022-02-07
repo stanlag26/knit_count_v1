@@ -18,12 +18,18 @@ class CountKnitWidgetProvider extends StatelessWidget {
 
 
 
-class CountKnitWidget extends StatelessWidget {
+class CountKnitWidget extends StatefulWidget {
   const CountKnitWidget({Key? key}) : super(key: key);
 
-//   void didChangeDependencies() {
-//
-// }
+  @override
+  State<CountKnitWidget> createState() => _CountKnitWidgetState();
+}
+
+class _CountKnitWidgetState extends State<CountKnitWidget> {
+  int number = 1;
+  void sum () {
+
+  }
 
   @override
   Widget build(BuildContext context) {
