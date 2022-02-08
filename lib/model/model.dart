@@ -10,9 +10,6 @@ class CountWidgetModel extends ChangeNotifier{
 
   void saveCount( BuildContext context) async{
     if (nameCount.isEmpty) return;
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(CountAdapter());
-    }
     final box = await Hive.openBox<Count>('counts_box');
     final count= Count(nameCount: nameCount, notesCount: notesCount, numberCount: numberCount);
     await box.add(count); //  добавляем сохраненную группу в список
@@ -34,9 +31,6 @@ class ListCountWidgetModel extends ChangeNotifier {
     _setup();
   }
 
-  // void showForm(BuildContext context, int indexInList) {
-  //   Navigator.of(context).pushNamed('/count');
-  // }
 
   void _readCountsFromHive(Box<Count> box) {
     _counts = box.values.toList();
@@ -44,39 +38,56 @@ class ListCountWidgetModel extends ChangeNotifier {
   }
 
   void _setup() async {
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(CountAdapter());
-    }
     final box = await Hive.openBox<Count>('counts_box');
     _readCountsFromHive(box);
     box.listenable().addListener(() => _readCountsFromHive(box));
   }
 
   void deleteCount(int index) async {
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(CountAdapter());
-    }
     final box = await Hive.openBox<Count>('counts_box');
     await box.deleteAt(index);
   }
 
 
-  Count dataCount = Count(nameCount: '111', notesCount: '11', numberCount: 11);
+  Count? dataCount;
+  late int countKey;
+
 
   void showCount(BuildContext context, int index)  async {
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(CountAdapter());
-    }
     final box = await Hive.openBox<Count>('counts_box');
-    final countKey = box.keyAt(index) as int;
+    countKey = box.keyAt(index) as int;
     dataCount = box.get(countKey) as Count;
-    print(dataCount);
-
-      Navigator.of(context).pushNamed('/count');
+    Navigator.of(context).pushNamed('/count', arguments: [dataCount, countKey]);
   }
 
 
-}
+  void plus (Count dataCount, int countKey ) async {
+
+    final box = await Hive.openBox<Count>('counts_box');
+    dataCount.numberCount ++;
+    box.put(countKey, dataCount);
+
+  }
+  void minus (Count dataCount, int countKey ) async {
+
+    final box = await Hive.openBox<Count>('counts_box');
+    dataCount.numberCount --;
+    box.put(countKey, dataCount);
+
+  }
+
+  void zero (Count dataCount, int countKey ) async {
+
+    final box = await Hive.openBox<Count>('counts_box');
+    dataCount.numberCount = 0;
+    box.put(countKey, dataCount);
+
+  }
+
+  }
+
+
+
 
 
 

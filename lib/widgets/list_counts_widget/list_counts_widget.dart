@@ -51,9 +51,66 @@ class CountCard extends StatelessWidget {
   final int indexInList;
   const CountCard({Key? key, required this.indexInList}) : super(key: key);
 
+
+  // void alertDialog() {
+  //    AlertDialog(
+  //     title: Text('Удаление'),
+  //     content: Text('Вы уверены что хотите удалит счетчик?'),
+  //     actions: <Widget>[
+  //       ElevatedButton(
+  //         child: Text('Да'),
+  //         onPressed: ()  {},
+  //       ),
+  //   ElevatedButton(
+  //     child: Text('Нет'),
+  //   onPressed: () {},
+  //   )
+  //     ],
+  //
+  //   );
+  // }
+
+
+
   @override
   Widget build(BuildContext context) {
     final model = context.read <ListCountWidgetModel>();
+
+
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: frontColor,
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Удалить счетчик?')
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Да', style: TextStyle(color: mainColor, fontSize: 15)),
+                onPressed: () {
+                  model.deleteCount(indexInList);
+                  Navigator.of(context).pop();
+                }
+              ),
+              TextButton(
+                child: const Text('Нет', style: TextStyle(color: mainColor, fontSize: 15)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return  Card(
       child: ListTile(
         tileColor: frontColor,
@@ -62,7 +119,7 @@ class CountCard extends StatelessWidget {
           title: Text(model.counts[indexInList].nameCount),
           subtitle: Text(model.counts[indexInList].numberCount.toString() + ' ряд.'),
           trailing: IconButton(
-              onPressed: () => model.deleteCount(indexInList),
+              onPressed: () => _showMyDialog(),
               icon: const Icon(Icons.delete, color: Colors.deepOrange,))
       ),
       elevation: 8,

@@ -43,7 +43,9 @@ class AddCountWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(width: 1,color: Colors.grey),
                 ),
-                labelText: 'Введите название проекта',
+                labelStyle: TextStyle(color: mainColor),
+                labelText:
+                'Введите название проекта',
 
               ),
               onChanged: (value) => model.nameCount = value,
@@ -64,6 +66,8 @@ class AddCountWidget extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(width: 1,color: Colors.grey),
                 ),
+                labelStyle: TextStyle(
+                    color: mainColor),
                 labelText: 'С какого ряда начать',
                 hintText: '0',
               ),

@@ -6,37 +6,63 @@ import 'package:knit_count_v1/model/model.dart';
 import 'package:provider/provider.dart';
 
 class CountKnitWidgetProvider extends StatelessWidget {
-  const CountKnitWidgetProvider({Key? key}) : super(key: key);
+   const CountKnitWidgetProvider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (context) => ListCountWidgetModel(),
-        child: const CountKnitWidget());
+    List dataCount = ModalRoute.of(context)!.settings.arguments as List;
+    return ChangeNotifierProvider.value(
+        value: ListCountWidgetModel(),
+        child: CountKnitWidget(dataCount: dataCount,));
   }
+
+
 }
 
 
 
 
+
 class CountKnitWidget extends StatefulWidget {
-  const CountKnitWidget({Key? key}) : super(key: key);
+ final List dataCount;
+   const CountKnitWidget({Key? key, required this.dataCount}) : super(key: key);
 
   @override
   State<CountKnitWidget> createState() => _CountKnitWidgetState();
 }
 
 class _CountKnitWidgetState extends State<CountKnitWidget> {
-  int number = 1;
-  void sum () {
 
-  }
 
   @override
   Widget build(BuildContext context) {
+    Count dataCount = widget.dataCount[0];
+    final int countKey = widget.dataCount[1];
+    final String nameCount = dataCount.nameCount;
+    final int numberCount = dataCount.numberCount;
+    final String notesCount = dataCount.notesCount;
     final model = context.read <ListCountWidgetModel>();
+
+    void plus (){
+      model.plus(dataCount, countKey);
+      setState(() {
+      });
+    }
+    void minus (){
+      model.minus(dataCount, countKey);
+      setState(() {
+      });
+    }
+    void zero (){
+      model.zero(dataCount, countKey);
+      setState(() {
+      });
+    }
+
+
     return Scaffold(
       appBar: AppBar(
-        title:  Text(model.dataCount.nameCount),
+        title:  Text(nameCount),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -49,10 +75,10 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
                     style: TextButton.styleFrom(
                       primary: mainColor,
                     ),
-                    onPressed: () {},
-                    child: const Text('65',
-                      style: TextStyle(
-                        fontSize: 150,
+                    onPressed: () => plus(),
+                    child:Text('$numberCount',
+                      style: const TextStyle(
+                        fontSize: 120,
                         shadows: <Shadow>[
                           Shadow(
                             offset: Offset(5.0, 5.0),
@@ -65,8 +91,8 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
 
                 // const SizedBox(height: 10),
                 ElevatedButton(
-                    onPressed: () {},
-                    onLongPress: () {},
+                    onPressed: () => minus(),
+                    onLongPress: () => zero(),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             const Color.fromRGBO(128, 116, 214, 1))),
