@@ -13,7 +13,6 @@ class CountWidgetModel extends ChangeNotifier{
     final box = await Hive.openBox<Count>('counts_box');
     final count= Count(nameCount: nameCount, notesCount: notesCount, numberCount: numberCount);
     await box.add(count); //  добавляем сохраненную группу в список
-    // print(box.values);
     Navigator.of(context).pop();
 
 
@@ -53,7 +52,7 @@ class ListCountWidgetModel extends ChangeNotifier {
   late int countKey;
 
 
-  void showCount(BuildContext context, int index)  async {
+  void showCount(BuildContext context, int index) async {
     final box = await Hive.openBox<Count>('counts_box');
     countKey = box.keyAt(index) as int;
     dataCount = box.get(countKey) as Count;
@@ -61,34 +60,30 @@ class ListCountWidgetModel extends ChangeNotifier {
   }
 
 
-  void plus (Count dataCount, int countKey ) async {
-
+  void plus(Count dataCount, int countKey) async {
     final box = await Hive.openBox<Count>('counts_box');
     dataCount.numberCount ++;
     box.put(countKey, dataCount);
-
   }
-  void minus (Count dataCount, int countKey ) async {
 
+  void minus(Count dataCount, int countKey) async {
     final box = await Hive.openBox<Count>('counts_box');
     dataCount.numberCount --;
     box.put(countKey, dataCount);
-
   }
 
-  void zero (Count dataCount, int countKey ) async {
-
+  void zero(Count dataCount, int countKey) async {
     final box = await Hive.openBox<Count>('counts_box');
     dataCount.numberCount = 0;
     box.put(countKey, dataCount);
-
   }
 
+  void comment(Count dataCount, int countKey, String value) async {
+    final box = await Hive.openBox<Count>('counts_box');
+    dataCount.notesCount = value;
+    box.put(countKey, dataCount);
   }
 
 
-
-
-
-
+}
 

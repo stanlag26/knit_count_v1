@@ -98,10 +98,10 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
                             const Color.fromRGBO(128, 116, 214, 1))),
                     child: const Text('Отнять \\ Обнулить')),
                 const SizedBox(height: 20),
-                const TextField(
+                TextField(
                   minLines: 10,
                   maxLines: 10,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: textFieldColor,
                     focusedBorder: OutlineInputBorder(
@@ -117,6 +117,10 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
                         'При нажатии на число, счетчик увеличивается.\n'
                         'При нажатии на "Отнять \\ Обнулить", счетчик убавится на 1, при долгом нажатии, обнулится.',
                   ),
+                 onChanged:(value) => model.comment(dataCount, countKey, value),
+                 // model.numberCount = int.tryParse(value)?? 0,
+                 controller: TextEditingController(text: notesCount),
+
 
                 ),
               ],
