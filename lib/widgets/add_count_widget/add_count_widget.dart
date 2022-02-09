@@ -32,6 +32,7 @@ class AddCountWidget extends StatelessWidget {
           children:  [
             const SizedBox(height: 30),
             TextField(
+              autofocus: true,
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: textFieldColor,

@@ -24,6 +24,9 @@ class ListCountsWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title:const Text('Счетчик вязания'),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.settings)
+          )],
       ),
       body: ListView.separated(
           itemCount: _listCount,
@@ -36,7 +39,7 @@ class ListCountsWidget extends StatelessWidget {
 
           Navigator.pushNamed(context, '/form');
         },
-        backgroundColor: const Color.fromRGBO(128, 116, 214, 1),
+        backgroundColor: mainColor,
         child: const Icon(Icons.add),
       ),
 
@@ -50,26 +53,6 @@ class ListCountsWidget extends StatelessWidget {
 class CountCard extends StatelessWidget {
   final int indexInList;
   const CountCard({Key? key, required this.indexInList}) : super(key: key);
-
-
-  // void alertDialog() {
-  //    AlertDialog(
-  //     title: Text('Удаление'),
-  //     content: Text('Вы уверены что хотите удалит счетчик?'),
-  //     actions: <Widget>[
-  //       ElevatedButton(
-  //         child: Text('Да'),
-  //         onPressed: ()  {},
-  //       ),
-  //   ElevatedButton(
-  //     child: Text('Нет'),
-  //   onPressed: () {},
-  //   )
-  //     ],
-  //
-  //   );
-  // }
-
 
 
   @override

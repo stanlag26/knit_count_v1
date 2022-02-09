@@ -71,23 +71,30 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
           children: [
             Column(
               children: [
-                TextButton(
-                    style: TextButton.styleFrom(
-                      primary: mainColor,
-                    ),
-                    onPressed: () => plus(),
-                    child:Text('$numberCount',
-                      style: const TextStyle(
-                        fontSize: 120,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(5.0, 5.0),
-                            blurRadius: 10.0,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                        ],
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                        primary: mainColor,
                       ),
-                    )),
+                      onPressed: () => plus(),
+                      child:FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text('$numberCount',
+                          maxLines: 1,
+                          style: const TextStyle(fontSize: 200,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset(5.0, 5.0),
+                                blurRadius: 10.0,
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                ),
 
                 // const SizedBox(height: 10),
                 ElevatedButton(
@@ -95,7 +102,7 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
                     onLongPress: () => zero(),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            const Color.fromRGBO(128, 116, 214, 1))),
+                            mainColor)),
                     child: const Text('Отнять \\ Обнулить')),
                 const SizedBox(height: 20),
                 TextField(
