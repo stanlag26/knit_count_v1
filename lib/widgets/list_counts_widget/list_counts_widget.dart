@@ -25,7 +25,7 @@ class ListCountsWidget extends StatelessWidget {
       appBar: AppBar(
         title:const Text('Счетчик вязания'),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.settings)
+          IconButton(onPressed: (){}, icon: const Icon(Icons.settings)
           )],
       ),
       body: ListView.separated(

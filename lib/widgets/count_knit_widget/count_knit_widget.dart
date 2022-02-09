@@ -4,6 +4,8 @@ import 'package:knit_count_v1/constants/constants.dart';
 import 'package:knit_count_v1/domain/entity/count.dart';
 import 'package:knit_count_v1/model/model.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
+
 
 class CountKnitWidgetProvider extends StatelessWidget {
    const CountKnitWidgetProvider({Key? key}) : super(key: key);
@@ -36,6 +38,7 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Wakelock.enable();
     Count dataCount = widget.dataCount[0];
     final int countKey = widget.dataCount[1];
     final String nameCount = dataCount.nameCount;
@@ -71,7 +74,7 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
           children: [
             Column(
               children: [
-                Container(
+                SizedBox(
                   height: 200,
                   width: double.infinity,
                   child: TextButton(

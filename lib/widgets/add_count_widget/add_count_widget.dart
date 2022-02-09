@@ -11,7 +11,7 @@ class AddCountProviderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context) => CountWidgetModel(),
-    child: AddCountWidget());
+    child: const AddCountWidget());
   }
 }
 
