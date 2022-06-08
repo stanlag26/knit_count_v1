@@ -66,6 +66,11 @@ class _CountKnitWidgetState extends State<CountKnitWidget> {
     return Scaffold(
       appBar: AppBar(
         title:  Text(nameCount),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.edit))
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
